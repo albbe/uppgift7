@@ -1,0 +1,48 @@
+Exercise 7.0 -- Reading words from a file
+
+We will begin by creating a class for reading in text from a file and splitting it into separate words. In your src folder, create a file containing a class called FileWordSplitter. Add a private field to your class of type ArrayList<String> called words.
+
+Now add a constructor to your class with the following header:
+
+public FileWordSplitter(String filename)
+The constructor should read the file with the given filename and add all the words in the file to the words ArrayList. You can find a guide to reading a file with Java below.
+
+When you read from a file with nextLine you get a String that will be a whole line of the text. You will need to split this up into individual words. Look in the documentation for the String class, and see if you can find a method for splitting a String into smaller strings. For each line, add the words from the line to the words ArrayList. In order to make this exercise slightly easier, we have provided a sample file hamlet.txt where all punctuation marks have been removed, and we have made sure that all words are separated by exactly one space character ( ).
+
+ 🛠 Reading a file line by line
+try {
+    // Attempt to open a text file
+    BufferedReader file = new BufferedReader(new FileReader("my_file.txt"));
+    
+    // Try to read the first line of the file
+    String line = file.readLine();
+    
+    // Keep reading while there are lines left
+    while (line != null){
+        // TODO: Add some code here to do something with the line
+        
+        line = file.readLine();
+    }
+
+    // Don't forget to close the file!
+    file.close();
+// Handle any errors that come up, such as the file not existing
+} catch (IOException e) {
+    System.out.println("Something went wrong: " + e.getMessage());
+    // Exit the program    
+    System.exit(1);     
+}
+In this example we simply shut down the program if something goes wrong. In actual "real world" code, it is more common to have some form of fallback solution, such as prompting the user to select a different file if the file was not found.
+
+Remember that you need to import all classes that you want to use (such as BufferedReader).
+
+ 📚 A brief note on regex
+Exercise 7.1 -- Getting the words
+
+Add a getter to FileWordSplitter that returns the words that you read from the file.
+
+Now is a good time to check so that your class works as intended. In the src folder you have been provided a file called hamlet.txt. This file contains the text from Shakespeare's Hamlet (without punctuation). If you run the following code (in a main method or using JShell) you should see that the fourth word of the text is indeed "Hamlet":
+
+FileWordSplitter splitter = new FileWordSplitter("hamlet.txt");
+ArrayList<String> hamletWords = splitter.getWords();
+System.out.println(hamletWords.get(3)); // Get the fourth word in hamlet.txt
